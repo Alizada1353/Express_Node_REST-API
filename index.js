@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+app.use(express.json())
 const port = process.env.PORT || 3000;
 
 const users = [
@@ -10,10 +11,21 @@ const users = [
 
 app.get('/', (req, res) => res.send('connection established!'))
 
-
+/**get all users */
 app.get('/api/users', (req, res) => res.send(users))
 
+/**add a new user */
+app.post('/api/users', (req, res) => {
+    const newUser = {
+        id: users.length + 1,
+        name: req.body.name,
+        job: req.body.job
+    }
+    users.push(newUser);
+    res.send(newUser);
+});
 
+/**get a specific user by id */
 app.get("/api/users/:id", (req, res) => {
     const user = users.find(user => user.id === parseInt(req.params.id))
     if(!user) res.status(404).send(`
