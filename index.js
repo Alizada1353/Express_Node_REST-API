@@ -1,7 +1,7 @@
 const Joi = require("@hapi/joi");
-const express = require('express')
-const app = express()
-app.use(express.json())
+const express = require('express');
+const app = express();
+app.use(express.json());
 const port = process.env.PORT || 3000;
 
 const users = [
@@ -19,7 +19,7 @@ app.get("/api/users", (req, res) => res.status(200).send(users));
 
 /**get a specific user by id */
 app.get("/api/users/:id", (req, res) => {
-    const user = users.find(user => user.id === parseInt(req.params.id))
+    const user = users.find(user => user.id === parseInt(req.params.id));
     if(!user) return res.status(404).send(`Bad Request`);
     res.status(200).send(user);
 });
@@ -72,4 +72,4 @@ function validateUser(user) {
   return schema.validate(user);
 }
 
-app.listen(port, () => console.log(`listening on port ${port}...`))
+app.listen(port, () => console.log(`listening on port ${port}...`));
