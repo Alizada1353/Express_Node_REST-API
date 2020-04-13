@@ -16,7 +16,12 @@ app.get('/api/users', (req, res) => res.send(users))
 
 app.get("/api/users/:id", (req, res) => {
     const user = users.find(user => user.id === parseInt(req.params.id))
-    if(!user) res.status(404).send('Not Found!')
+    if(!user) res.status(404).send(`
+    <div style="text-align: center; border: 0.5px solid lightGray; border-radius: 6px;">
+        <h1 style="font-size: 2rem">404</h1>
+        <h1 style="color: red;">Not Found!</h1>
+    </div>
+    `);
     res.send(user)
 });
 
