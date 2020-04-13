@@ -17,20 +17,25 @@ app.get('/api/users', (req, res) => res.send(users))
 
 /**add a new user */
 app.post('/api/users', (req, res) => {
+
     const schema = Joi.object({
       name: Joi.string().min(3).max(30).required(),
       job: Joi.string().min(3).max(30).required(),
     });
+
     const result = schema.validate(req.body);
+
     if(result.error) {
         res.status(400).send(result.error.details[0].message);
         return;
     }
+
     const newUser = {
         id: users.length + 1,
         name: req.body.name,
         job: req.body.job
     }
+    
     users.push(newUser);
     res.send(newUser);
 });
