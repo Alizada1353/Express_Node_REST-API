@@ -14,7 +14,10 @@ app.get('/', (req, res) => res.send('connection established!'))
 app.get('/api/users', (req, res) => res.send(users))
 
 
-app.get("/api/users/:year/:month", (req, res) => res.send(req.params));
+app.get("/api/users/:id", (req, res) => {
+    const user = users.find(user => user.id === parseInt(req.params.id))
+    res.send(user)
+});
 
 
 app.listen(port, () => console.log(`listening on port ${port}...`))
