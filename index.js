@@ -35,7 +35,7 @@ app.post('/api/users', (req, res) => {
         name: req.body.name,
         job: req.body.job
     }
-    
+
     users.push(newUser);
     res.send(newUser);
 });
@@ -52,5 +52,31 @@ app.get("/api/users/:id", (req, res) => {
     res.send(user)
 });
 
+
+/**Updating a User info */
+app.put('/api/users/:id', (req, res) => {
+    //checking if the user exists
+    const user = users.find(user => user.id === parseInt(req.params.id));
+    if (!user) res.status(404).send(`
+    <div style="text-align: center; border: 0.5px solid lightGray; border-radius: 6px;">
+        <h1 style="font-size: 2rem">404</h1>
+        <h1 style="color: red;">User Not Found!</h1>
+    </div>
+    `);
+    //validating the request body 
+    const schema = Joi.object({
+      name: Joi.string().min(3).max(30).required(),
+      job: Joi.string().min(3).max(30).required(),
+    });
+    const result = schema.validate(req.body);
+    if (result.error) {
+      res.status(400).send(result.error.details[0].message);
+      return;
+    }
+    //Updating the user 
+    user.name = req.body.name;
+    user.job = req.body.job;
+    res.send(user);
+});
 
 app.listen(port, () => console.log(`listening on port ${port}...`))
