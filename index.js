@@ -58,7 +58,7 @@ app.post('/api/users', (req, res) => {
 app.put('/api/users/:id', (req, res) => {
     //checking if the user exists
     const user = users.find(user => user.id === parseInt(req.params.id));
-    if (!user) res.status(404).send('Bad Request');
+    if (!user) res.status(404).send('Not Found!');
     //validating the request body 
     const { error } = validateUser(req.body);
     if (error) {
@@ -79,5 +79,16 @@ function validateUser(user) {
 
     return schema.validate(user);
 }
+
+/**Removing a user by id*/
+app.delete('/api/users/:id', (req, res) => {
+  //checking if the user exists
+  const user = users.find(user => user.id === parseInt(req.params.id));
+  if (!user) res.status(404).send('Not Found!');
+  //removing user
+  const index = users.indexOf(user);
+  const result = users.splice(index, 1);
+  res.status(200).send(result);
+});
 
 app.listen(port, () => console.log(`listening on port ${port}...`))
