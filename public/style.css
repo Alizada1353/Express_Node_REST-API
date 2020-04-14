@@ -1,0 +1,62 @@
+body
+{
+  padding: 20px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.main
+{
+  margin: 10px;
+  background: #f2f2f2;
+  border: 1px solid black;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.main-container {
+  border: 1px solid rgba(48, 84, 90, 0.61);
+  text-align: center;
+  border-radius: 12px;
+  max-width: 434px;
+  margin: 5px auto;
+  box-shadow: 4px 6px 4px -2px gray;
+}
+.image {
+  text-align: center;
+}
+img {
+  height: 40%;
+  width: 74%;
+  margin: 11% auto;
+  border: 1px solid gray;
+  border-radius: 4px;
+  box-shadow: 4px 6px 4px -2px gray;
+}
+.sub-container {
+  max-width: 100%;
+}
+.my-h2 {
+  text-align: center;
+  margin-bottom: 33px;
+  border: 1px solid rgba(185, 184, 184, 0.562);
+  border-radius: 4px;
+  padding: 6px;
+  font-size: 26px;
+  display: inline-block;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: rgba(73, 73, 73, 0.904);
+}
+.submit {
+  margin: 6% auto;
+  width: 33%;
+}
+.my-checkbox {
+  text-align: center;
+  margin-top: 42px;
+}
+.well {
+  text-align: center;
+  padding-top: 3%;
+}
+* {
+  margin: 0 auto;
+}
