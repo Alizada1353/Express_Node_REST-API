@@ -4,7 +4,8 @@
   "description": "A simple demonstration of building REST API using Nodejs &amp; Express and performing some CRUD operations.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index",
+    "dev": "nodemon index"
   },
   "repository": {
     "type": "git",
