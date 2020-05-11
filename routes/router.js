@@ -2,16 +2,28 @@ const Joi = require("@hapi/joi");
 const express = require('express');
 const router = express.Router();
 const users = require('../Users');
-router.use(express.json());
+const db_users = require('../db_users');
+
+
 
 /**get all users */
 router.get("/api/users", (req, res) => res.status(200).send(users));
 
 
+router.post("/api/login", (req, res) => {
+  const user = db_users.find((user) => user.email === req.body.email && user.password === req.body.password);
+  if (!user) return res.status(404).send(`User Not Found sorry! ${req.params.email, req.params.password}`);
+  res.json({
+    status: 200,
+    message: 'valid'
+  });
+  window.location = '../views/home.html';
+});
+
 /**get a specific user by id */
 router.get("/api/users/:id", (req, res) => {
   const user = users.find((user) => user.id === parseInt(req.params.id));
-  if (!user) return res.status(404).send(`Bad Request`);
+  if (!user) return res.status(404).send(`User Not Found!`);
   res.status(200).send(user);
 });
 
@@ -36,7 +48,7 @@ router.post("/api/users/", (req, res) => {
 /**Updating a User info */
 router.put("/api/users/:id", (req, res) => {
   const user = users.find((user) => user.id === parseInt(req.params.id));
-  if (!user) return res.status(404).send("Not Found!");
+  if (!user) return res.status(404).send("User Not Found!");
 
   const { error } = validateUser(req.body);
   if (error) return res.status(400).send(result.error.details[0].message);
@@ -50,7 +62,7 @@ router.put("/api/users/:id", (req, res) => {
 /**Removing a user by id*/
 router.delete("/api/users/:id", (req, res) => {
   const user = users.find((user) => user.id === parseInt(req.params.id));
-  if (!user) return res.status(404).send("Not Found!");
+  if (!user) return res.status(404).send("User Not Found!");
 
   const index = users.indexOf(user);
   const result = users.splice(index, 1);
